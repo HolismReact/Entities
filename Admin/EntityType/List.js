@@ -5,7 +5,7 @@ const listActions = (itemIds) => {
 
     const setRandomDefaultImages = ({ setProgress, reloadList }) => {
         setProgress(true)
-        post('/entityType/setRandomDefaultImages').then(data => {
+        post('/entityType/setRandomDefaultImages', itemIds).then(data => {
             app.success('Random default images are set');
             setProgress(false);
             reloadList();
