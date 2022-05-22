@@ -42,13 +42,28 @@ const row = (item) => <>
     <td>{item.name}</td>
 </>
 
-const itemActions = (item) => <>
-    <ItemAction
-        title='Set random default image'
-        icon={ShuffleIcon}
-        action={`/entityType/setRandomDefaultImage?id=${item.id}`}
-    />
-</>
+const itemActions = (item) => {
+    const setRandomDefaultImage = ({ setProgress, setItem }) => {
+        setProgress(true);
+        post(`/entityType/setRandomDefaultImage?id=${item.id}`)
+            .then(data => {
+                app.success('Random default image is set');
+                setProgress(false);
+                setItem(data);
+            }, error => {
+                app.error(error);
+                setProgress(false);
+            })
+    }
+
+    return <>
+        <ItemAction
+            title='Set random default image'
+            icon={ShuffleIcon}
+            click={(params) => setRandomDefaultImage(params)}
+        />
+    </>
+}
 
 const EntityTypes = () => {
     return <List
