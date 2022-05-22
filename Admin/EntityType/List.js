@@ -1,22 +1,42 @@
-import ShuffleIcon from '@mui/icons-material/Shuffle';
+import ShuffleIcon from '@mui/icons-material/Shuffle'
+import SearchIcon from '@mui/icons-material/Search'
 import { List, ListAction, ItemAction, Image, app, post } from '@List'
 
 const listActions = (itemIds) => {
 
+    const findAll = ({ setProgress, reloadList }) => {
+        setProgress(true)
+        post('/entityType/findAll').then(data => {
+            app.success('Found all entity types')
+            setProgress(false)
+            reloadList()
+        }, error => {
+            app.error(error)
+            setProgress(false)
+            reloadList()
+        })
+    }
+
     const setRandomDefaultImages = ({ setProgress, reloadList }) => {
         setProgress(true)
         post('/entityType/setRandomDefaultImages', itemIds).then(data => {
-            app.success('Random default images are set');
-            setProgress(false);
-            reloadList();
+            app.success('Random default images are set')
+            setProgress(false)
+            reloadList()
         }, error => {
-            app.error(error);
-            setProgress(false);
-            reloadList();
+            app.error(error)
+            setProgress(false)
+            reloadList()
         })
     }
 
     return <>
+        <ListAction
+            text="Find all"
+            title="Finds all entity types existing in this software instance"
+            icon={SearchIcon}
+            click={(params) => findAll(params)}
+        />
         <ListAction
             text="Set random images"
             title="Random images would be set as default images for the selected entity types"
@@ -44,15 +64,15 @@ const row = (item) => <>
 
 const itemActions = (item) => {
     const setRandomDefaultImage = ({ setProgress, setItem }) => {
-        setProgress(true);
+        setProgress(true)
         post(`/entityType/setRandomDefaultImage?id=${item.id}`)
             .then(data => {
-                app.success('Random default image is set');
-                setProgress(false);
-                setItem(data);
+                app.success('Random default image is set')
+                setProgress(false)
+                setItem(data)
             }, error => {
-                app.error(error);
-                setProgress(false);
+                app.error(error)
+                setProgress(false)
             })
     }
 
@@ -76,5 +96,5 @@ const EntityTypes = () => {
     />
 }
 
-export default EntityTypes;
+export default EntityTypes
 export { EntityTypes }
