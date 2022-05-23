@@ -3,18 +3,18 @@ import FingerprintIcon from '@mui/icons-material/Fingerprint';
 
 const EntitiesRoutes = [
     {
-        "path": "/entityTypes",
-        "component": EntityTypes,
-        "superAdmin": true
+        path: "/entityTypes",
+        component: EntityTypes,
+        superAdmin: true
     }
 ]
 
 const EntitiesMenu = [
     {
-        "title": "Entity Types",
-        "icon": FingerprintIcon,
-        "url": "/entityTypes",
-        "superAdmin": true
+        title: "Entity Types",
+        icon: FingerprintIcon,
+        url: "/entityTypes",
+        superAdmin: true
     }
 ]
 

@@ -1,6 +1,6 @@
 import ShuffleIcon from '@mui/icons-material/Shuffle'
 import SearchIcon from '@mui/icons-material/Search'
-import { List, ListAction, ItemAction, Image, app, post } from '@List'
+import { List, ListAction, Text, ItemAction, Image, app, post } from '@List'
 
 const listActions = (itemIds) => {
 
@@ -43,14 +43,21 @@ const listActions = (itemIds) => {
             icon={ShuffleIcon}
             minCardinality={1}
             click={(params) => setRandomDefaultImages(params)}
-            superAdmin={true}
-            production={false}
+            superAdmin
+            devOnly
         />
     </>
 }
 
+const filters = <>
+    <Text
+        column='Name'
+        placeholder='Name'
+    />
+</>
+
 const headers = <>
-    <td>Default image</td>
+    <td className="text-left">Default image</td>
     <th>Name</th>
 </>
 
@@ -83,8 +90,8 @@ const itemActions = (item) => {
             title='Set random default image'
             icon={ShuffleIcon}
             click={(params) => setRandomDefaultImage(params)}
-            superAdmin={true}
-            production={false}
+            superAdmin
+            devOnly
         />
     </>
 }
@@ -94,6 +101,7 @@ const EntityTypes = () => {
         title='Entity Types'
         entityType='entityType'
         listActions={listActions}
+        filters={filters}
         headers={headers}
         row={row}
         itemActions={itemActions}
