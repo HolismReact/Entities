@@ -43,6 +43,8 @@ const listActions = (itemIds) => {
             icon={ShuffleIcon}
             minCardinality={1}
             click={(params) => setRandomDefaultImages(params)}
+            superAdmin={true}
+            production={false}
         />
     </>
 }
@@ -56,7 +58,7 @@ const row = (item) => <>
     <td>
         <Image
             url={item.relatedItems.defaultImageUrl}
-            uploadUrl={`/entityType/setImage?id=${item.id}`}
+            uploadUrl={`/entityType/setImage?entityTypeId=${item.id}`}
         />
     </td>
     <td>{item.name}</td>
@@ -81,6 +83,8 @@ const itemActions = (item) => {
             title='Set random default image'
             icon={ShuffleIcon}
             click={(params) => setRandomDefaultImage(params)}
+            superAdmin={true}
+            production={false}
         />
     </>
 }
